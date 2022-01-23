@@ -1,18 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Ball : MonoBehaviour
+namespace Balls.Runtime.Scripts
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Ball : MonoBehaviour
     {
+        private Collider _collider;
+        private Transform _transform;
         
-    }
+        // Start is called before the first frame update
+        void Awake()
+        {
+            _transform = GetComponent<Transform>();
+            _collider = GetComponent<Collider>();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        public void SetDirection(Vector3 dir)
+        {
+            //TODO tests and realization
+        }
+
+        public void SetPosition(Vector3 pos)
+        {
+            //TODO tests and realization
+        }
+        
+        // Update is called once per frame
+        void Update()
+        {
+        
+        }
+        
         
     }
 }
+
