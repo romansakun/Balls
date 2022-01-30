@@ -13,7 +13,7 @@ namespace Balls.Runtime.Scripts
         // Update is called once per frame
         void Update()
         {
-
+            Debug.Log("UPDATE");
         }
     }
 }
