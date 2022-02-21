@@ -10,20 +10,25 @@ namespace Balls.Runtime.Scripts
         {
             new Vector3(-1, -1),
             new Vector3(0, 1),
-            new Vector3(1, 0)
+            new Vector3(1, 0),
+            new Vector3(-1, -1)
         };
         [SerializeField] private List<Vector3> _calcVertices = new List<Vector3>();
         [SerializeField] private List<Vector2> _uvs = new List<Vector2>
         {
             new Vector2(0, 0),
             new Vector2(.5f, 1),
-            new Vector2(1, .5f)
+            new Vector2(1, .5f),
+            new Vector2(1, 0f),
         };
         [SerializeField] private List<int> _triangles = new List<int>()
         {
             0,
             1,
-            2
+            2,
+            0,
+            2,
+            3
         };
         [SerializeField] private MeshFilter _meshFilter;
         [SerializeField] private MeshRenderer _meshRenderer;
@@ -37,19 +42,24 @@ namespace Balls.Runtime.Scripts
             {
                 new Vector3(-1, -1),
                 new Vector3(0, 1),
-                new Vector3(1, 0)
+                new Vector3(1, 0),
+                new Vector3(1, -1)
             };
             _triangles = new List<int>()
             {
                 0,
                 1,
-                2
+                2,
+                0,
+                2,
+                3
             };
             _uvs = new List<Vector2>
             {
                 new Vector2(0, 0),
                 new Vector2(.5f, 1),
-                new Vector2(1, .5f)
+                new Vector2(1, .5f),
+                new Vector2(1, 0f),
             };
         }
 
@@ -97,6 +107,7 @@ namespace Balls.Runtime.Scripts
                 if ((_f1 >= 0 && _f2 >= 0 && _f3 >= 0) || (_f1 < 0 && _f2 < 0 && _f3 < 0))
                 {
                     _meshRenderer.material.color = Color.green;
+                    return;
                 }
                 else
                 {
@@ -108,18 +119,11 @@ namespace Balls.Runtime.Scripts
         private void SetVertices()
         {
             var t = transform;
-            var p = t.position;
-            var up = t.up; //+ p;
-            var right = t.right;// + p;
-            var forward = t.forward + p;
             
             _calcVertices.Clear();
             for (int i = 0; i < _vertices.Count; i++)
             {
                 var v = _vertices[i];
-                //_calcVertices.Add(new Vector3(v.x - up.x, v.y - up.y));
-                //_calcVertices.Add(new Vector3(v.x + right.x, v.y + up.y));
-                //_calcVertices.Add(v);
                 _calcVertices.Add(t.TransformPoint(v));
             }
             
