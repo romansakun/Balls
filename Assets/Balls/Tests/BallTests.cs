@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Balls.Runtime.Scripts;
 using NUnit.Framework;
 using UnityEngine;
@@ -46,7 +47,37 @@ public class BallTests
         var expectedDistance = speed * timeInterval;
         var actualDistance = Vector3.Distance(Vector3.zero, ball.transform.position);
         Assert.AreEqual(expectedDistance, actualDistance, 0.05f);
-    }    
+    }
+
+    private List<int> list;
+
+    [SetUp]
+    public void SetUp()
+    {
+        list = new List<int>(10000);
+        for (int i = 0; i < 10000; i++)
+        {
+            list.Add(i);
+        }
+    }
+
+    [Test]
+    public void TestPerformanceListForeach()
+    {
+        foreach (var e in list)
+        {
+            var a = e + 1;
+        }
+    }
+
+    [Test]
+    public void TestPerformanceListFor()
+    {
+        for (var index = 0; index < list.Count; index++)
+        {
+            var a = list[index] + 1;
+        }
+    }
     
 }
 

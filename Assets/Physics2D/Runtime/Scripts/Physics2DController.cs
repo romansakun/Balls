@@ -7,8 +7,10 @@ namespace Physics2D.Runtime
 {
     public class Physics2DController : MonoBehaviour
     {
-        private List<ColliderController> _colliderControllers = new List<ColliderController>();
-        private List<RigidbodyController> _rigidbodyControllers = new List<RigidbodyController>();
+        //эти списки можно сделать массивами и инициализировать их нужной длины, а потом просто инкрементить индекс после добавления элементов.
+        
+        private readonly List<ColliderController> _colliderControllers = new List<ColliderController>(1000);
+        private readonly List<RigidbodyController> _rigidbodyControllers = new List<RigidbodyController>(2000);
 
         
         public void AddRigidbodyController(RigidbodyController rigidbodyController)

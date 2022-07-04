@@ -6,18 +6,20 @@ namespace Physics2D.Runtime.Rigidbodies
 {
     public class RigidbodyController
     {
-        private Context _context;
+        private readonly Context _context;
+        private readonly int _pointsCount;
 
         public RigidbodyController(Transform transform, List<Vector3> collisionPoints)
         {
             _context = new Context(transform, collisionPoints);
+            _pointsCount = _context.worldCollisionPoints.Length;
         }
         
         
         public void UpdatePosition()
         {
-            _context.currentPosition = _context.transform.position;
-            for (var i = 0; i < _context.worldCollisionPoints.Count; i++)
+            _context.currentPosition = _context.transform.localPosition;
+            for (var i = 0; i < _pointsCount; i++)
             {
                 _context.worldCollisionPoints[i] = _context.transform.TransformPoint(_context.localCollisionPoints[i]);
             }
@@ -27,27 +29,32 @@ namespace Physics2D.Runtime.Rigidbodies
         {
             if (_context.currentReflect.sqrMagnitude > float.Epsilon)
             {
-                _context.currentVelocity = _context.currentReflect.normalized * (_context.currentVelocity.magnitude * .5f);
+                _context.currentVelocity = _context.currentReflect.normalized * (_context.currentVelocity.magnitude * Random.Range(.55f, 0.95f));
+                if (_context.currentVelocity.magnitude < 5f)
+                {
+                   _context.currentVelocity = _context.currentReflect.normalized * Random.Range(1.5f, 5f);
+                }
             }
             else
             {
                 _context.currentVelocity += new Vector3(0, Constants.GravityConstant * deltaTime, 0);
             }
-
+            
             _context.transform.position += _context.currentVelocity * deltaTime;
             
             _context.currentReflect = Vector3.zero;
         }
 
+        
         public void ExecuteCollision(ColliderController colliderController)
         {
-            foreach (var collisionPoint in _context.worldCollisionPoints)
+            for (var i = 0; i < _pointsCount; i++)
             {
-                if (!colliderController.ContainsWorldPoint(collisionPoint))
+                var collisionPoint = _context.worldCollisionPoints[i];
+                if (!colliderController.ContainsWorldPoint(collisionPoint, out Vector3 normal))
                     continue;
 
-                var reflectVector = _context.currentPosition - collisionPoint;
-                _context.currentReflect += reflectVector;
+                _context.UpdateCurrentReflect(collisionPoint, normal);
             }
         }
     }
