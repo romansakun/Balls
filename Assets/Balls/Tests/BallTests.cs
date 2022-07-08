@@ -4,8 +4,6 @@ using Balls.Runtime.Scripts;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
-using Object = UnityEngine.Object;
 
 public class BallTests
 {
