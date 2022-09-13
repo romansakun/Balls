@@ -29,7 +29,7 @@ namespace Physics2D.Runtime.Rigidbodies
         {
             var multiplier1 = .75f;
             var multiplier2 = 1.25f;
-            if (_context.currentReflect.sqrMagnitude > float.Epsilon)
+            if (_context.currentReflect.sqrMagnitude > .1f)
             {
                 _context.currentVelocity = _context.currentReflect.normalized * (_context.currentVelocity.magnitude * multiplier1);
                 if (_context.currentVelocity.magnitude < 5f)
@@ -41,9 +41,7 @@ namespace Physics2D.Runtime.Rigidbodies
             {
                 _context.currentVelocity += new Vector3(0, Constants.GravityConstant * deltaTime, 0);
             }
-            
             _context.transform.position += _context.currentVelocity * deltaTime;
-            
             _context.currentReflect = Vector3.zero;
         }
 
