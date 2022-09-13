@@ -30,7 +30,7 @@ namespace Physics2D.Runtime.Rigidbodies
             if (_context.currentReflect.sqrMagnitude > .1f)
             {
                 _context.currentVelocity = _context.currentReflect.normalized * _context.currentVelocity.magnitude;
-                if (_context.currentVelocity.magnitude < 5f)
+                if (_context.currentVelocity.magnitude < 3f)
                 {
                    _context.currentVelocity = _context.currentReflect.normalized;
                 }
