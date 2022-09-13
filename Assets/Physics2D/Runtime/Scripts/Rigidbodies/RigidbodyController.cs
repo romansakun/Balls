@@ -30,7 +30,7 @@ namespace Physics2D.Runtime.Rigidbodies
             if (_context.currentReflect.sqrMagnitude > .1f)
             {
                 _context.currentVelocity = _context.currentReflect.normalized * _context.currentVelocity.magnitude;
-                if (_context.currentVelocity.magnitude < 3f)
+                if (_context.currentVelocity.magnitude < 5f)
                 {
                    _context.currentVelocity = _context.currentReflect.normalized;
                 }
@@ -39,11 +39,7 @@ namespace Physics2D.Runtime.Rigidbodies
             {
                 _context.currentVelocity += new Vector3(0, Constants.GravityConstant * deltaTime, 0);
             }
-
-            _context.currentVelocity.x *= deltaTime;
-            _context.currentVelocity.y *= deltaTime;
-            
-            _context.transform.position += _context.currentVelocity;
+            _context.transform.position += _context.currentVelocity * deltaTime;
             _context.currentReflect = Vector3.zero;
         }
 
