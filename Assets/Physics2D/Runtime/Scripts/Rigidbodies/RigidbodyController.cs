@@ -7,19 +7,19 @@ namespace Physics2D.Runtime.Rigidbodies
     public class RigidbodyController
     {
         private readonly Context _context;
-        private readonly int _pointsCount;
+        private readonly int _pointCount;
 
         public RigidbodyController(Transform transform, List<Vector3> collisionPoints)
         {
             _context = new Context(transform, collisionPoints);
-            _pointsCount = _context.worldCollisionPoints.Length;
+            _pointCount = _context.worldCollisionPoints.Length;
         }
         
         
         public void UpdatePosition()
         {
             _context.currentPosition = _context.transform.localPosition;
-            for (var i = 0; i < _pointsCount; i++)
+            for (var i = 0; i < _pointCount; i++)
             {
                 _context.worldCollisionPoints[i] = _context.transform.TransformPoint(_context.localCollisionPoints[i]);
             }
@@ -50,7 +50,7 @@ namespace Physics2D.Runtime.Rigidbodies
         
         public void ExecuteCollision(ColliderController colliderController)
         {
-            for (var i = 0; i < _pointsCount; i++)
+            for (var i = 0; i < _pointCount; i++)
             {
                 var collisionPoint = _context.worldCollisionPoints[i];
                 if (!colliderController.ContainsWorldPoint(collisionPoint, out Vector3 normal))
