@@ -25,7 +25,7 @@ namespace Physics2D.Runtime.Rigidbodies
             }
         }
 
-        public void ExecuteMovement(float dTime)
+        public void ExecuteMovement(float deltaTime)
         {
             if (_context.currentReflect.sqrMagnitude > .1f)
             {
@@ -37,10 +37,11 @@ namespace Physics2D.Runtime.Rigidbodies
             }
             else
             {
-                _context.currentVelocity += new Vector3(0, Constants.GravityConstant * dTime, 0);
+                _context.currentVelocity += new Vector3(0, Constants.GravityConstant * deltaTime, 0);
             }
-            _context.currentVelocity.x *= dTime;
-            _context.currentVelocity.y *= dTime;
+
+            _context.currentVelocity.x *= deltaTime;
+            _context.currentVelocity.y *= deltaTime;
             
             _context.transform.position += _context.currentVelocity;
             _context.currentReflect = Vector3.zero;
