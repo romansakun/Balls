@@ -27,14 +27,12 @@ namespace Physics2D.Runtime.Rigidbodies
 
         public void ExecuteMovement(float deltaTime)
         {
-            var multiplier1 = .75f;
-            var multiplier2 = 1.25f;
             if (_context.currentReflect.sqrMagnitude > .1f)
             {
-                _context.currentVelocity = _context.currentReflect.normalized * (_context.currentVelocity.magnitude * multiplier1);
+                _context.currentVelocity = _context.currentReflect.normalized * _context.currentVelocity.magnitude;
                 if (_context.currentVelocity.magnitude < 5f)
                 {
-                   _context.currentVelocity = _context.currentReflect.normalized * multiplier2;
+                   _context.currentVelocity = _context.currentReflect.normalized;
                 }
             }
             else
