@@ -14,8 +14,7 @@ namespace Physics2D.Runtime.Rigidbodies
             _context = new Context(transform, collisionPoints);
             _pointsCount = _context.worldCollisionPoints.Length;
         }
-        
-        
+
         public void UpdatePosition()
         {
             _context.currentPosition = _context.transform.localPosition;
