@@ -26,7 +26,6 @@ namespace Physics2D.Runtime
         private void Update()
         {
             var deltaTime = Time.deltaTime;
-           
             for (int i = 0; i < _colliderControllers.Count; i++)
             {
                 var colliderController = _colliderControllers[i];
