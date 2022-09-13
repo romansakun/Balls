@@ -39,7 +39,11 @@ namespace Physics2D.Runtime.Rigidbodies
             {
                 _context.currentVelocity += new Vector3(0, Constants.GravityConstant * deltaTime, 0);
             }
-            _context.transform.position += _context.currentVelocity * deltaTime;
+
+            _context.currentVelocity.x *= deltaTime;
+            _context.currentVelocity.y *= deltaTime;
+            
+            _context.transform.position += _context.currentVelocity;
             _context.currentReflect = Vector3.zero;
         }
 
